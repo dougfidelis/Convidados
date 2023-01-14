@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".view.GuestsFormActivity">
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/name"/>
+
+    <EditText
+        android:id="@+id/edit_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/text_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_present"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/edit_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/present"
+        android:layout_marginTop="16dp"/>
+
+    <RadioGroup
+        android:id="@+id/radio_confirmation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_present"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+    <RadioButton
+        android:id="@+id/radio_present"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/present"/>
+
+    <RadioButton
+        android:id="@+id/radio_absent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/absent"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/confirmation_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/radio_confirmation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="Confirm"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
