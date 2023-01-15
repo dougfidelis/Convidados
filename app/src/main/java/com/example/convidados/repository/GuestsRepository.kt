@@ -11,10 +11,10 @@ class GuestsRepository private constructor(context: Context) {
 
     private val guestsDataBase = GuestsDataBase(context)
 
-    private val id = DataBaseConstants.GUEST.COLUMNS.ID
-    private val name = DataBaseConstants.GUEST.COLUMNS.NAME
-    private val presence = DataBaseConstants.GUEST.COLUMNS.PRESENCE
-    private val tableName = DataBaseConstants.GUEST.TABLE_NAME
+//    private val id = DataBaseConstants.GUEST.COLUMNS.ID
+//    private val name = DataBaseConstants.GUEST.COLUMNS.NAME
+//    private val presence = DataBaseConstants.GUEST.COLUMNS.PRESENCE
+//    private val tableName = DataBaseConstants.GUEST.TABLE_NAME
 
     companion object {
         private lateinit var repository: GuestsRepository
@@ -28,15 +28,16 @@ class GuestsRepository private constructor(context: Context) {
     }
 
     fun insert(guest: GuestModel): Boolean {
+
+
         return try {
             val db = guestsDataBase.writableDatabase
             val presenceInt = if (guest.presence) 1 else 0
 
             val values = ContentValues()
-            values.put(presence, presenceInt)
-            values.put(name, guest.name)
-
-            db.insert(tableName, null, values)
+            values.put(DataBaseConstants.GUEST.COLUMNS.NAME, guest.name)
+            values.put(DataBaseConstants.GUEST.COLUMNS.PRESENCE, presenceInt)
+            db.insert(DataBaseConstants.GUEST.TABLE_NAME, null, values)
             true
         } catch (e: Exception) {
             false
@@ -49,13 +50,13 @@ class GuestsRepository private constructor(context: Context) {
             val presenceInt = if (guest.presence) 1 else 0
 
             val values = ContentValues()
-            values.put(presence, presenceInt)
-            values.put(name, guest.name)
+            values.put(DataBaseConstants.GUEST.COLUMNS.PRESENCE, presenceInt)
+            values.put(DataBaseConstants.GUEST.COLUMNS.NAME, guest.name)
 
-            val selection = "$id = ?"
+            val selection = "${DataBaseConstants.GUEST.COLUMNS.ID} = ?"
             val args = arrayOf(guest.id.toString())
 
-            db.update(tableName, values, selection, args)
+            db.update(DataBaseConstants.GUEST.TABLE_NAME, values, selection, args)
             true
         } catch (e: Exception) {
             false
@@ -69,21 +70,22 @@ class GuestsRepository private constructor(context: Context) {
             val selection = "$id = ?"
             val args = arrayOf(id.toString())
 
-            db.delete(tableName, selection, args)
+            db.delete(DataBaseConstants.GUEST.TABLE_NAME, selection, args)
             true
         } catch (e: Exception) {
             false
         }
     }
 
+
     fun getAll(): List<GuestModel> {
         val guestList = mutableListOf<GuestModel>()
 
         try {
             val db = guestsDataBase.readableDatabase
-            val projection = arrayOf(id, name, presence)
+            val projection = arrayOf(DataBaseConstants.GUEST.COLUMNS.ID, DataBaseConstants.GUEST.COLUMNS.NAME, DataBaseConstants.GUEST.COLUMNS.PRESENCE)
             val cursor = db.query(
-                tableName,
+                DataBaseConstants.GUEST.TABLE_NAME,
                 projection,
                 null,
                 null,
@@ -94,9 +96,9 @@ class GuestsRepository private constructor(context: Context) {
 
             if (cursor != null && cursor.count > 0) {
                 while (cursor.moveToNext()) {
-                    val id = cursor.getInt(cursor.getColumnIndex(id))
-                    val name = cursor.getString(cursor.getColumnIndex(name))
-                    val presence = cursor.getInt(cursor.getColumnIndex(presence))
+                    val id = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.ID))
+                    val name = cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME))
+                    val presence = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE))
 
                     guestList.add(GuestModel(id, name, presence == 1))
                 }
@@ -111,19 +113,20 @@ class GuestsRepository private constructor(context: Context) {
     }
 
 
+
     fun getPresent(): List<GuestModel> {
         val guestList = mutableListOf<GuestModel>()
 
         try {
             val db = guestsDataBase.readableDatabase
 
-            val projection = arrayOf(id, name, presence)
+            val projection = arrayOf(DataBaseConstants.GUEST.COLUMNS.ID, DataBaseConstants.GUEST.COLUMNS.NAME, DataBaseConstants.GUEST.COLUMNS.PRESENCE)
 
-            val selection = "$presence= ?"
+            val selection = "${DataBaseConstants.GUEST.COLUMNS.PRESENCE}= ?"
             val args = arrayOf("1")
 
             val cursor = db.query(
-                tableName,
+                DataBaseConstants.GUEST.TABLE_NAME,
                 projection,
                 selection,
                 args,
@@ -134,9 +137,9 @@ class GuestsRepository private constructor(context: Context) {
 
             if (cursor != null && cursor.count > 0) {
                 while (cursor.moveToNext()) {
-                    val id = cursor.getInt(cursor.getColumnIndex(id))
-                    val name = cursor.getString(cursor.getColumnIndex(name))
-                    val presence = cursor.getInt(cursor.getColumnIndex(presence))
+                    val id = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.ID))
+                    val name = cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME))
+                    val presence = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE))
 
                     guestList.add(GuestModel(id, name, presence == 1))
                 }
@@ -157,9 +160,9 @@ class GuestsRepository private constructor(context: Context) {
         try {
             val db = guestsDataBase.readableDatabase
 
-            val projection = arrayOf(id, name, presence)
+            val projection = arrayOf(DataBaseConstants.GUEST.COLUMNS.ID, DataBaseConstants.GUEST.COLUMNS.NAME, DataBaseConstants.GUEST.COLUMNS.PRESENCE)
 
-            val selection = "$presence= ?"
+            val selection = "${DataBaseConstants.GUEST.COLUMNS.PRESENCE} = ?"
             val args = arrayOf("1")
 
             val cursor =
@@ -170,9 +173,9 @@ class GuestsRepository private constructor(context: Context) {
 
             if (cursor != null && cursor.count > 0) {
                 while (cursor.moveToNext()) {
-                    val id = cursor.getInt(cursor.getColumnIndex(id))
-                    val name = cursor.getString(cursor.getColumnIndex(name))
-                    val presence = cursor.getInt(cursor.getColumnIndex(presence))
+                    val id = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.ID))
+                    val name = cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME))
+                    val presence = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE))
 
                     guestList.add(GuestModel(id, name, presence == 1))
                 }
