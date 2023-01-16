@@ -11,11 +11,10 @@ import com.example.convidados.repository.GuestsRepository
 class AllGuestsViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = GuestsRepository.getInstance(application.applicationContext)
 
-
     private val listAllGuests = MutableLiveData<List<GuestModel>>()
     val guests: LiveData<List<GuestModel>> = listAllGuests
 
-    fun getAll(){
-        repository.getAll()
+    fun getAll() {
+        listAllGuests.value = repository.getAll()
     }
 }

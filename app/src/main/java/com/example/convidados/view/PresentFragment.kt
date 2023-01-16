@@ -24,7 +24,7 @@ class PresentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val viewModel =
-            ViewModelProvider(this).get(PresentViewModel::class.java)
+            ViewModelProvider(this)[PresentViewModel::class.java]
 
         _binding = FragmentPresentBinding.inflate(inflater, container, false)
         val root: View = binding.root
