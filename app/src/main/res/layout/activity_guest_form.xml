@@ -11,64 +11,62 @@
         android:id="@+id/text_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/name"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/name"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/text_name"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/text_name" />
 
     <TextView
         android:id="@+id/text_present"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/edit_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/present"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_name" />
 
     <RadioGroup
         android:id="@+id/radio_confirmation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_present"
-        android:orientation="horizontal"
         android:gravity="center"
-        >
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_present">
 
-    <RadioButton
-        android:id="@+id/radio_present"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/present"/>
+        <RadioButton
+            android:id="@+id/radio_present"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/present" />
 
-    <RadioButton
-        android:id="@+id/radio_absent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/absent"/>
+        <RadioButton
+            android:id="@+id/radio_absent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/absent" />
     </RadioGroup>
 
     <Button
         android:id="@+id/confirmation_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/radio_confirmation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
-        android:text="Confirm"/>
-
+        android:text="Confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radio_confirmation" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

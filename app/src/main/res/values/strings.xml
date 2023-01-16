@@ -13,4 +13,8 @@
     <string name="name">Name</string>
     <string name="present">Present</string>
     <string name="absent">Absent</string>
+    <string name="guest">Guest</string>
+    <string name="presence">Presence</string>
+    <string name="guest_name">Guest Name</string>
+    <string name="confirmed">Confirmed</string>
 </resources>
