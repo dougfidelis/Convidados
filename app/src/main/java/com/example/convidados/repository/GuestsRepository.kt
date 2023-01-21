@@ -87,11 +87,7 @@ class GuestsRepository private constructor(context: Context) {
             val cursor = db.query(
                 DataBaseConstants.GUEST.TABLE_NAME,
                 projection,
-                null,
-                null,
-                null,
-                null,
-                null
+                null,null,null,null,null
             )
 
             if (cursor != null && cursor.count > 0) {
