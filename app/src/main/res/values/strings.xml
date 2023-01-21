@@ -6,7 +6,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="all_guests">All guests</string>
     <string name="menu_presents">Presents</string>
     <string name="menu_absents">Absents</string>
@@ -17,4 +16,8 @@
     <string name="presence">Presence</string>
     <string name="guest_name">Guest Name</string>
     <string name="confirmed">Confirmed</string>
+    <string name="remove_guest">Removing Guest</string>
+    <string name="remove_guest_message">Confirm removal of this guest?</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>
