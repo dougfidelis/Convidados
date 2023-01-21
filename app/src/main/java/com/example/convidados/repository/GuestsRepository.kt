@@ -31,7 +31,7 @@ class GuestsRepository private constructor(context: Context) {
 
         return try {
             val db = guestsDataBase.writableDatabase
-            val presenceInt = if (guest.presence) 1 else 0
+            val presenceInt = if (guest.presence) 0 else 1
 
             val values = ContentValues()
             values.put(guestName, guest.name)
@@ -46,7 +46,7 @@ class GuestsRepository private constructor(context: Context) {
     fun update(guest: GuestModel): Boolean {
         return try {
             val db = guestsDataBase.writableDatabase
-            val presenceInt = if (guest.presence) 1 else 0
+            val presenceInt = if (guest.presence) 0 else 1
 
             val values = ContentValues()
             values.put(guestPresence, presenceInt)
@@ -66,7 +66,7 @@ class GuestsRepository private constructor(context: Context) {
         return try {
             val db = guestsDataBase.writableDatabase
 
-            val selection = "$id = ?"
+            val selection = "$guestId = ?"
             val args = arrayOf(id.toString())
 
             db.delete(tableName, selection, args)
@@ -184,5 +184,6 @@ class GuestsRepository private constructor(context: Context) {
         }
         return guestList
     }
+
 
 }
