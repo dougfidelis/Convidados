@@ -15,7 +15,7 @@ class GuestsViewHolder(private val bind: RowGuestBinding, private val listener: 
     fun bind(guest: GuestModel) {
 
         bind.textName.text = guest.name
-        bind.textPresence.text = if (guest.presence) "NO" else "YES"
+        bind.textPresence.text = if (guest.presence) "YES" else "NO"
 
         bind.textName.setOnClickListener {
             listener.onClick(guest.id)

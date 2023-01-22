@@ -27,11 +27,9 @@ class GuestsRepository private constructor(context: Context) {
     }
 
     fun insert(guest: GuestModel): Boolean {
-
-
         return try {
             val db = guestsDataBase.writableDatabase
-            val presenceInt = if (guest.presence) 0 else 1
+            val presenceInt = if (guest.presence) 1 else 0
 
             val values = ContentValues()
             values.put(guestName, guest.name)
@@ -46,7 +44,7 @@ class GuestsRepository private constructor(context: Context) {
     fun update(guest: GuestModel): Boolean {
         return try {
             val db = guestsDataBase.writableDatabase
-            val presenceInt = if (guest.presence) 0 else 1
+            val presenceInt = if (guest.presence) 1 else 0
 
             val values = ContentValues()
             values.put(guestPresence, presenceInt)
@@ -94,9 +92,9 @@ class GuestsRepository private constructor(context: Context) {
                 while (cursor.moveToNext()) {
                     val id = cursor.getInt(cursor.getColumnIndex(guestId))
                     val name = cursor.getString(cursor.getColumnIndex(guestName))
-                    val presence = cursor.getInt(cursor.getColumnIndex(guestPresence))
+                    val presence: Boolean = cursor.getInt(cursor.getColumnIndex(guestPresence)) == 1
 
-                    guestList.add(GuestModel(id, name, presence == 1))
+                    guestList.add(GuestModel(id, name, presence))
                 }
             }
 
@@ -106,6 +104,43 @@ class GuestsRepository private constructor(context: Context) {
             return guestList
         }
         return guestList
+    }
+
+    @SuppressLint("Range")
+    fun get(id: Int): GuestModel? {
+        var guest: GuestModel? = null
+
+        try {
+            val db = guestsDataBase.readableDatabase
+
+            val projection = arrayOf(guestId, guestName, guestPresence)
+
+            val selection = "$guestId = ?"
+            val args = arrayOf(id.toString())
+
+            val cursor = db.query(
+                DataBaseConstants.GUEST.TABLE_NAME,
+                projection,
+                selection,
+                args,
+                null, null, null
+            )
+
+            if (cursor != null && cursor.count > 0) {
+                while (cursor.moveToNext()) {
+                    val name = cursor.getString(cursor.getColumnIndex(guestName))
+                    val presence: Boolean = cursor.getInt(cursor.getColumnIndex(guestPresence)) == 1
+
+                    guest = GuestModel(id, name, presence)
+                }
+            }
+
+            cursor.close()
+
+        } catch (e: Exception) {
+            return guest
+        }
+        return guest
     }
 
 
@@ -119,7 +154,7 @@ class GuestsRepository private constructor(context: Context) {
             val projection = arrayOf(guestId, guestName, guestPresence)
 
             val selection = "$guestPresence = ?"
-            val args = arrayOf("1")
+            val args = arrayOf("0")
 
             val cursor = db.query(
                 DataBaseConstants.GUEST.TABLE_NAME,
@@ -135,9 +170,9 @@ class GuestsRepository private constructor(context: Context) {
                 while (cursor.moveToNext()) {
                     val id = cursor.getInt(cursor.getColumnIndex(guestId))
                     val name = cursor.getString(cursor.getColumnIndex(guestName))
-                    val presence = cursor.getInt(cursor.getColumnIndex(guestPresence))
+                    val presence: Boolean = cursor.getInt(cursor.getColumnIndex(guestPresence)) == 1
 
-                    guestList.add(GuestModel(id, name, presence == 1))
+                    guestList.add(GuestModel(id, name, presence))
                 }
             }
 
@@ -159,7 +194,7 @@ class GuestsRepository private constructor(context: Context) {
 
             val cursor =
                 db.rawQuery(
-                    "SELECT id, name, presence FROM Guest WHERE presence = 0",
+                    "SELECT id, name, presence FROM Guest WHERE presence = 1",
                     null, null
                 )
 
@@ -167,9 +202,9 @@ class GuestsRepository private constructor(context: Context) {
                 while (cursor.moveToNext()) {
                     val id = cursor.getInt(cursor.getColumnIndex(guestId))
                     val name = cursor.getString(cursor.getColumnIndex(guestName))
-                    val presence = cursor.getInt(cursor.getColumnIndex(guestPresence))
+                    val presence: Boolean = cursor.getInt(cursor.getColumnIndex(guestPresence)) == 1
 
-                    guestList.add(GuestModel(id, name, presence == 1))
+                    guestList.add(GuestModel(id, name, presence))
                 }
             }
 
